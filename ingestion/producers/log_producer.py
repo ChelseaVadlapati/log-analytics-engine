@@ -41,7 +41,7 @@ MESSAGES = {
 }
 
 
-def make_log(service: str) -> dict:
+def make_log(service: str, timestamp: int = None) -> dict:
     level = random.choice(LEVELS)
     ms = random.randint(5, 2000)
     template = random.choice(MESSAGES[service])
@@ -53,7 +53,7 @@ def make_log(service: str) -> dict:
     )
     return {
         "event_id":    str(uuid.uuid4()),
-        "timestamp":   int(time.time() * 1000),
+        "timestamp":   timestamp if timestamp is not None else int(time.time() * 1000),
         "service":     service,
         "level":       level,
         "message":     message,
